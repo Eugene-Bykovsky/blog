@@ -31,6 +31,7 @@ class Post(models.Model):
     published = PublishedManager()
 
     class Meta:
+        unique_together = ('slug', 'publish')
         ordering = ['-publish']
         indexes = [
             models.Index(fields=['publish']),
@@ -40,4 +41,9 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:post_detail', args=[self.pk])
+        return reverse('blog:post_detail',
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day,
+                             self.slug])
+
