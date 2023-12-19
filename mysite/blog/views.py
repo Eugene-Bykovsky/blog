@@ -33,7 +33,7 @@ def post_share(request, post_id):
         if form.is_valid():
             # Поля формы успешно прошли валидацию
             cd = form.cleaned_data
-            # ... отправить электронное письмо
+            # Todo... отправить электронное письмо
     else:
         form = EmailPostForm()
     return render(request,
